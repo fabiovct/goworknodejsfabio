@@ -17,9 +17,9 @@ export default function Login() {
 
         });
 
-
-        if(response.data.token !== 'failed'){
-            localStorage.setItem('token',response.data.token)
+            console.log(response.data[0]['status'])
+        if(response.data[0]['status'] === 'true'){
+            localStorage.setItem('status',response.data[0]['status'])
             window.location.href = '/home';
         }
         
@@ -40,7 +40,7 @@ export default function Login() {
             <div className="jumbotron">
             <form onSubmit = {loginUser}>
                 <div className="form-group">
-                    <label htmlFor="email">Email</label>
+                    <label>Email</label>
                     <input
                         className="form-control" 
                         id="email"
@@ -50,7 +50,7 @@ export default function Login() {
                     />
                 </div>
                 <div className="form-group">
-                    <label htmlFor="password">password</label>
+                    <label>password</label>
                     <input
                         className="form-control" 
                         id="password"
