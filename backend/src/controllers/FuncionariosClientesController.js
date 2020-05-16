@@ -13,15 +13,13 @@ module.exports = {
     async create(req,res) {
         try{
         var name = req.body.name
-        var email = req.body.email
-        var password = req.body.password
+        var cpf = req.body.cpf
         var id_cliente = req.body.id_cliente
 
         const createUser = await db_connection('funcionarios_clientes')
         .insert([{
             nome_usuario: name, 
-            email_usuario: email, 
-            password_usuario: password,
+            cpf_usuario: cpf, 
             id_cliente: id_cliente
         }])
         res.json(createUser)
@@ -34,8 +32,7 @@ module.exports = {
         try{
         var id = req.body.id
         var name = req.body.name
-        var email = req.body.email
-        var password = req.body.password
+        var cpf = req.body.cpf
         var id_cliente = req.body.id_cliente
 
         const updateUser = await db_connection('funcionarios_clientes')
@@ -44,8 +41,7 @@ module.exports = {
         })
         .update({
             nome_usuario: name, 
-            email_usuario: email, 
-            password_usuario: password,
+            cpf_usuario: cpf, 
             id_cliente: id_cliente
         })
 
