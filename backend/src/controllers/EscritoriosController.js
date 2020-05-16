@@ -14,13 +14,11 @@ module.exports = {
         try{
         var name = req.body.name
         var address = req.body.address
-        var numberPhone = req.body.numberPhone
 
         const createOfficce = await db_connection('escritorios')
         .insert([{
             nome_escritorio: name, 
             endereco_escritorio: address, 
-            telefone_escritorio: numberPhone
         }])
         //.into('escritorios')
         res.json(createOffice)
@@ -34,7 +32,6 @@ module.exports = {
         var id = req.body.id
         var name = req.body.name
         var address = req.body.address
-        var numberPhone = req.body.numberPhone
 
         const updateOffice = await db_connection('escritorios')
         .where({
@@ -43,7 +40,6 @@ module.exports = {
         .update({
             nome_escritorio: name, 
             endereco_escritorio: address, 
-            telefone_escritorio: numberPhone
         })
 
         res.json(updateOffice)
@@ -71,7 +67,7 @@ module.exports = {
             const list =  await db_connection.select().from('escritorios').where({id_escritorio: id})
             res.json(list)
             }catch(e){
-                res.json({erro: e, msg: 'Erro ao Listar Escritórios'})
+                res.json({erro: e, msg: 'Erro'})
         }
     
     },

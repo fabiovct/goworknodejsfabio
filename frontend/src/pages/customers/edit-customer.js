@@ -2,22 +2,22 @@ import React, { useEffect, useState} from 'react';
 import api from '../../services/api';
 import { Link } from 'react-router-dom';
     
-export default function EditOffices(req) {
+export default function EditCustomers(req) {
     const [name, setName] = useState('');
-    const [address, setAddress] = useState('');
+    const [cpf_cnpj, setCPF_CNPJ] = useState('');
 
-    const [offices, setOffice] = useState([]);
+    const [customers, setCustomers] = useState([]);
     const id = req.match.params['id'];
     let inputName = React.createRef();
-    let inputAddress = React.createRef();
+    let inputCPF_CNPJ = React.createRef();
     
     useEffect(() => {
-        async function loadOffice() {
-            const response = await api.get('api/escritorios/'+id, {
+        async function loadCustomer() {
+            const response = await api.get('api/clientes/'+id, {
             });
-            setOffice(response.data)
+            setCustomers(response.data)
         }
-        loadOffice();
+        loadCustomer();
     },
     []
 
@@ -29,47 +29,47 @@ export default function EditOffices(req) {
     const data = {
             'id': id,
             'name': inputName.current.value, 
-            'address': inputAddress.current.value,
+            'cpf_cnpj': inputCPF_CNPJ.current.value,
         };
 
-        await api.put('/api/escritorios', data, {
+        await api.put('/api/clientes', data, {
         }).then(() => {
-            window.location.href = '/offices';
+            window.location.href = '/customers';
         });
-        event.push('/offices')
+        event.push('/customers')
     }
         
     return (
         
         <div className="container">
-        {offices.map(office => (
+        {customers.map(customer => (
             
         <form  key={id}>
         
             <div className="form-group">
-            <label htmlFor="name">Unidade</label>
+            <label>Cliente</label>
             <input
                 type = "text"
                 className="form-control" 
                 id="name"
                 ref={inputName}
-                defaultValue={office.nome_escritorio}
+                defaultValue={customer.nome_cliente}
                 onChange={event => setName(event.target.value)}
             />
             </div>
             <div className="form-group">
-            <label htmlFor="preco">Endereço</label>
+            <label htmlFor="preco">CPF/CNPJ</label>
             <input
                 className="form-control" 
-                id="address"
-                ref={inputAddress}
-                defaultValue={office.endereco_escritorio}
-                onChange={event => setAddress(event.target.value)}
+                id="cpf_cnpj"
+                ref={inputCPF_CNPJ}
+                defaultValue={customer.cpf_cnpj}
+                onChange={event => setCPF_CNPJ(event.target.value)}
             />
             </div>
             
-            <button type="submit" className="btn btn-primary" onClick={(event) => handleSubmit(event)}>Submit</button>
-            <Link to="/offices">
+            <button type="submit" className="btn btn-primary" onClick={(event) => handleSubmit(event)}>Atualizar</button>
+            <Link to="/customers">
             <button className="btn btn-danger ml-2">Voltar</button>
             </Link>
             

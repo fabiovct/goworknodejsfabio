@@ -2,61 +2,57 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 
-export default function Offices() {
+export default function Customers() {
 
-    function deleteOffice(id) {
-        api.delete('/api/escritorios', { data: { id: id }})
+    function deleteCustomer(id) {
+        api.delete('/api/clientes', { data: { id: id }})
            .then((result) => {
-            //    const data = result.data.data
-               //this.props.toggle()
                window.location.reload()
         })
 
     };
 
-    const [offices, setOffices] = useState([]);
+    const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
         
-        async function loadOffices() {
-            const response = await api.get('/api/escritorios', {
+        async function loadCustomers() {
+            const response = await api.get('/api/clientes', {
             });
-            setOffices(response.data)
+            setCustomers(response.data)
     }
-    loadOffices();
+    loadCustomers();
 },
 []
 )
-
-
 
     return (
         <>
         
         <div className="container">
-        <h4>Escritorios</h4>
+        <h4>Clientes</h4>
         
         <table className="table">
         <thead>
                 <tr>
                     <th>#</th>
-                    <th>Unidade</th>
+                    <th>Cliente</th>
                     <th>Operação</th>
                 </tr>
         </thead>
-            {offices.map(office => (
+            {customers.map(customer => (
                     
-                <tbody key={office.id_escritorio}>
+                <tbody key={customer.id_cliente}>
                 <tr>
-            <th>{office.id_escritorio}</th>
-                <td>{office.nome_escritorio}</td>
+            <th>{customer.id_cliente}</th>
+                <td>{customer.nome_cliente}</td>
                 <td>
-                    <Link to={'offices/'+office.id_escritorio}>
+                    <Link to={'customers/'+customer.id_cliente}>
                     <button className="btn btn-primary btn-sm">Editar</button>
                     </Link>
                     <button 
                         className="btn btn-danger btn-sm ml-2" 
-                        onClick={() => deleteOffice(office.id_escritorio)}
+                        onClick={() => deleteCustomer(customer.id_cliente)}
                     >Excluir</button>
                 </td>
                 </tr>

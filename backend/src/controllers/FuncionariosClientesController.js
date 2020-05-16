@@ -51,6 +51,7 @@ module.exports = {
     } 
         
     },
+
     async delete(req,res) {
         try{
         var id = req.body.id
@@ -61,7 +62,17 @@ module.exports = {
     }catch(e){
         res.json({erro: e, msg: 'Erro ao Excluir Usuário'})
     }
-        
-    }
+    },
+
+    async selectById(req,res){
+        var id = req.params.id
+        try{
+            const list =  await db_connection.select().from('funcionarios_clientes').where({id_funcionarios: id})
+            res.json(list)
+            }catch(e){
+                res.json({erro: e, msg: 'Erro'})
+        }
+    
+    },
 
 }

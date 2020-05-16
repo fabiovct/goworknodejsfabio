@@ -31,6 +31,8 @@ routes.route('/api/planos').all(passport.validate)
     .post( PlanosController.create)
     .put( PlanosController.edit)
     .delete( PlanosController.delete)
+routes.route('/api/planos/:id').all(passport.validate)
+    .get(PlanosController.selectById);
 
 //clientes
 routes.route('/api/clientes').all(passport.validate)
@@ -38,6 +40,8 @@ routes.route('/api/clientes').all(passport.validate)
     .post( ClientesController.create)
     .put( ClientesController.edit)
     .delete( ClientesController.delete)
+routes.route('/api/clientes/:id').all(passport.validate)
+    .get(ClientesController.selectById);
 
 //usuarios
 routes.route('/api/usuarios').all(passport.validate)
@@ -45,5 +49,7 @@ routes.route('/api/usuarios').all(passport.validate)
     .post( FuncionariosClientesController.create)
     .put( FuncionariosClientesController.edit)
     .delete( FuncionariosClientesController.delete)
+routes.route('/api/usuarios/:id').all(passport.validate)
+    .get(FuncionariosClientesController.selectById);
 
 module.exports = routes;

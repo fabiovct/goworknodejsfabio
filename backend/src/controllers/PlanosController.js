@@ -48,6 +48,7 @@ module.exports = {
     } 
         
     },
+
     async delete(req,res) {
         try{
         var id = req.body.id
@@ -57,8 +58,19 @@ module.exports = {
         res.json(deleteScheme)
     }catch(e){
         res.json({erro: e, msg: 'Erro ao Excluir Plano'})
-    }
-        
-    }
+    }        
+    },
+
+    async selectById(req,res){
+        var id = req.params.id
+        try{
+            const list =  await db_connection.select().from('planos_coworking').where({id_plano: id})
+            res.json(list)
+            }catch(e){
+                res.json({erro: e, msg: 'Erro'})
+        }
+    
+    },
+
 
 }

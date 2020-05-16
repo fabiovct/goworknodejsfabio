@@ -3,7 +3,6 @@ exports.up = function(knex) {
         table.increments('id_escritorio').primary()
         table.string('nome_escritorio').notNull().unique()
         table.string('endereco_escritorio')
-        table.string('telefone_escritorio')
     })
 };
 
