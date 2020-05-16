@@ -22,6 +22,8 @@ routes.route('/api/escritorios').all(passport.validate)
     .post( EscritoriosController.create)
     .put( EscritoriosController.edit)
     .delete( EscritoriosController.delete)
+routes.route('/api/escritorios/:id').all(passport.validate)
+    .get(EscritoriosController.selectById);
 
 //planos
 routes.route('/api/planos').all(passport.validate)

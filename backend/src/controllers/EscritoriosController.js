@@ -63,6 +63,17 @@ module.exports = {
         res.json({erro: e, msg: 'Erro ao Excluir Escritório'})
     }
         
-    }
+    },
+
+    async selectById(req,res){
+        var id = req.params.id
+        try{
+            const list =  await db_connection.select().from('escritorios').where({id_escritorio: id})
+            res.json(list)
+            }catch(e){
+                res.json({erro: e, msg: 'Erro ao Listar Escritórios'})
+        }
+    
+    },
 
 }
