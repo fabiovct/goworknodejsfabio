@@ -32,6 +32,7 @@ module.exports = {
 
     async edit(req,res) {
         try{
+        var id = req.body.id
         var name = req.body.name
         var cpf_cnpj = req.body.cpf_cnpj
         var id_escritorio = req.body.id_escritorio

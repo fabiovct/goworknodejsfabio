@@ -40,23 +40,4 @@ module.exports = {
         response.json("usuario deslogado")
 
     },
-    
-    async validateToken(req, res) {
-        const userData = req.headers.auth || null
-        try {
-            if(userData) {
-                const token = jwt.decode(userData, authSecret)
-                if(new Date(token.exp * 1000) > new Date()) {
-                    return res.send(true)
-                }
-            }
-        } catch(e) {
-            // problema com o token
-        }
-    
-        res.send(false)
-    }
-
-
-
 }

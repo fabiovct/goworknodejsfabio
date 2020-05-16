@@ -3,6 +3,7 @@ const AuthController = require('./controllers/AuthController');
 const EscritoriosController = require('./controllers/EscritoriosController');
 const PlanosController = require('./controllers/PlanosController');
 const ClientesController = require('./controllers/ClientesController');
+const FuncionariosClientesController = require('./controllers/FuncionariosClientesController');
 const passport = require('./passport');
 
 
@@ -36,5 +37,11 @@ routes.route('/api/clientes').all(passport.validate)
     .put( ClientesController.edit)
     .delete( ClientesController.delete)
 
+//usuarios
+routes.route('/api/usuarios').all(passport.validate)
+    .get( FuncionariosClientesController.list)
+    .post( FuncionariosClientesController.create)
+    .put( FuncionariosClientesController.edit)
+    .delete( FuncionariosClientesController.delete)
 
 module.exports = routes;
