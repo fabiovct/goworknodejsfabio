@@ -51,7 +51,7 @@ export default function Customers() {
                     <button className="btn btn-primary btn-sm">Editar</button>
                     </Link>
                     
-                    <Link to={'customers/employees/'+customer.id_cliente}>
+                    <Link to={'customers/employees/new/'+customer.id_cliente}>
                     <button className="btn btn-success btn-sm ml-2">Cadastrar Funcionários</button>
                     </Link>
 
@@ -67,7 +67,7 @@ export default function Customers() {
             ))}
             </table>
             <Link to="customers/new">
-            <button className="btn btn-success btn-sm">Nova Unidade</button>
+            <button className="btn btn-success btn-sm">Novo Cliente</button>
             </Link>
             <Link to="/home">
             <button className="btn btn-danger btn-sm ml-2">Voltar</button>

@@ -13,6 +13,8 @@ import EditSchemes from './pages/schemes/edit-scheme';
 import EditCustomers from './pages/customers/edit-customer';
 import NewCustomers from './pages/customers/new-customer';
 import Customers from './pages/customers';
+import NewEmployee from './pages/customers/new-employee';
+import EditEmployee from './pages/customers/edit-employee';
 
 import React from 'react';
 
@@ -37,6 +39,8 @@ import React from 'react';
                 <Route path="/customers" exact component={Customers}/>
                 <Route path="/customers/new" exact component={NewCustomers}/>
                 <Route path="/customers/:id" exact component={EditCustomers}/>
+                <Route path="/customers/employees/new/:id" exact component={NewEmployee}/>
+                <Route path="/customers/employees/edit/:id_usuario/:id_cliente" exact component={EditEmployee}/>
 
 
 

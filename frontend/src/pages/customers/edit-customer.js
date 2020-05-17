@@ -112,7 +112,7 @@ export default function EditCustomers(req) {
             <th>{employee.id_funcionarios}</th>
                 <td>{employee.nome_usuario}</td>
                 <td>
-                    <Link to={'employee/'+employee.id_funcionarios}>
+                    <Link to={'employees/edit/'+employee.id_funcionarios+'/'+id}>
                     <button className="btn btn-primary btn-sm">Editar</button>
                     </Link>
                     
@@ -130,7 +130,7 @@ export default function EditCustomers(req) {
             </table>
 
 
-            <Link to={'customers/employees/'+id}>
+            <Link to={'employees/new/'+id}>
                 <button className="btn btn-success ml-2">Cadastrar Funcionários</button>
             </Link>
 

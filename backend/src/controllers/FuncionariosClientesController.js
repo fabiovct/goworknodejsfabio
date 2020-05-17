@@ -19,7 +19,7 @@ module.exports = {
         try{
         var name = req.body.name
         var cpf = req.body.cpf
-        var id_cliente = req.body.id_cliente
+        var id_cliente = req.body.id
 
         const createUser = await db_connection('funcionarios_clientes')
         .insert([{
