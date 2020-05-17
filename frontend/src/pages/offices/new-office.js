@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
 export default function NewOffices() {
     const [name, setName] = useState('');
@@ -41,6 +42,10 @@ export default function NewOffices() {
                 />
             </div>
             <button type="submit" className="btn btn-primary">Cadastrar</button>
+            <Link to="/offices">
+                <button className="btn btn-danger ml-2">Voltar</button>
+            </Link>
+            
         </form>
         </div>
     )

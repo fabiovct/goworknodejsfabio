@@ -45,11 +45,12 @@ routes.route('/api/clientes/:id').all(passport.validate)
 
 //usuarios
 routes.route('/api/usuarios').all(passport.validate)
-    .get( FuncionariosClientesController.list)
     .post( FuncionariosClientesController.create)
     .put( FuncionariosClientesController.edit)
     .delete( FuncionariosClientesController.delete)
 routes.route('/api/usuarios/:id').all(passport.validate)
+    .get(FuncionariosClientesController.list);
+routes.route('/api/usuarios/edit/:id').all(passport.validate)
     .get(FuncionariosClientesController.selectById);
 
 module.exports = routes;

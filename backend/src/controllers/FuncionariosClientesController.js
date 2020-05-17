@@ -3,8 +3,13 @@ const db_connection = require('./../db_connection');
 
 module.exports = {
     async list(req, res) {
+        var id = req.params.id
+        
         try{
         const list =  await db_connection.select().from('funcionarios_clientes')
+        .where({
+            id_cliente: id
+        })
         res.json(list)
         }catch(e){
             res.json({erro: e, msg: 'Erro ao Listar Usuários'})

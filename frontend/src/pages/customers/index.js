@@ -50,6 +50,11 @@ export default function Customers() {
                     <Link to={'customers/'+customer.id_cliente}>
                     <button className="btn btn-primary btn-sm">Editar</button>
                     </Link>
+                    
+                    <Link to={'customers/employees/'+customer.id_cliente}>
+                    <button className="btn btn-success btn-sm ml-2">Cadastrar Funcionários</button>
+                    </Link>
+
                     <button 
                         className="btn btn-danger btn-sm ml-2" 
                         onClick={() => deleteCustomer(customer.id_cliente)}
@@ -61,7 +66,7 @@ export default function Customers() {
             
             ))}
             </table>
-            <Link to="offices/new">
+            <Link to="customers/new">
             <button className="btn btn-success btn-sm">Nova Unidade</button>
             </Link>
             <Link to="/home">

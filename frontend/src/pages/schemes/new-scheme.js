@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
 export default function NewSchemes() {
     const [name, setName] = useState('');
@@ -41,6 +42,9 @@ export default function NewSchemes() {
                 />
             </div>
             <button type="submit" className="btn btn-primary">Cadastrar</button>
+            <Link to="/schemes">
+                <button className="btn btn-danger ml-2">Voltar</button>
+            </Link>
         </form>
         </div>
     )

@@ -7,9 +7,18 @@ export default function EditCustomers(req) {
     const [cpf_cnpj, setCPF_CNPJ] = useState('');
 
     const [customers, setCustomers] = useState([]);
+    const [employees, setEmployees] = useState([]);
     const id = req.match.params['id'];
     let inputName = React.createRef();
     let inputCPF_CNPJ = React.createRef();
+
+    function deleteEmployee(id) {
+        api.delete('/api/clientes', { data: { id: id }})
+           .then((result) => {
+               window.location.reload()
+        })
+
+    };
     
     useEffect(() => {
         async function loadCustomer() {
@@ -17,6 +26,19 @@ export default function EditCustomers(req) {
             });
             setCustomers(response.data)
         }
+        async function loadEmployees() {
+            const data = {
+                'id': id,
+            };
+            console.log(data)
+
+            const response = await api.get('api/usuarios/'+id, {
+                
+            });
+            setEmployees(response.data)
+        }
+
+        loadEmployees();
         loadCustomer();
     },
     []
@@ -69,12 +91,53 @@ export default function EditCustomers(req) {
             </div>
             
             <button type="submit" className="btn btn-primary" onClick={(event) => handleSubmit(event)}>Atualizar</button>
-            <Link to="/customers">
-            <button className="btn btn-danger ml-2">Voltar</button>
-            </Link>
             
         </form>
         ))}
+<br></br>
+<p>Funcionários Cadastrados</p>
+<table className="table mt-2">
+    
+        <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Operação</th>
+                </tr>
+        </thead>
+            {employees.map(employee => (
+                    
+                <tbody key={employee.id_funcionarios}>
+                <tr>
+            <th>{employee.id_funcionarios}</th>
+                <td>{employee.nome_usuario}</td>
+                <td>
+                    <Link to={'employee/'+employee.id_funcionarios}>
+                    <button className="btn btn-primary btn-sm">Editar</button>
+                    </Link>
+                    
+
+                    <button 
+                        className="btn btn-danger btn-sm ml-2" 
+                        onClick={() => deleteEmployee(employee.id_funcionarios)}
+                    >Excluir</button>
+                </td>
+                </tr>
+                </tbody>
+    
+            
+            ))}
+            </table>
+
+
+            <Link to={'customers/employees/'+id}>
+                <button className="btn btn-success ml-2">Cadastrar Funcionários</button>
+            </Link>
+
+            <Link to="/customers">
+                <button className="btn btn-danger ml-2">Voltar</button>
+            </Link>
+
         </div>
         
         )
