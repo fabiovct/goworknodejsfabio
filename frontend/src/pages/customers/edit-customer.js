@@ -5,15 +5,22 @@ import { Link } from 'react-router-dom';
 export default function EditCustomers(req) {
     const [name, setName] = useState('');
     const [cpf_cnpj, setCPF_CNPJ] = useState('');
+    const [id_office, setId_office] = useState('');
+    const [id_scheme, setId_scheme] = useState('');
 
     const [customers, setCustomers] = useState([]);
     const [employees, setEmployees] = useState([]);
+    const [offices, setOffices] = useState([]);
+    const [schemes, setSchemes] = useState([]);
+
     const id = req.match.params['id'];
     let inputName = React.createRef();
     let inputCPF_CNPJ = React.createRef();
+    let inputId_office = React.createRef();
+    let inputId_scheme = React.createRef();
 
     function deleteEmployee(id) {
-        api.delete('/api/clientes', { data: { id: id }})
+        api.delete('/api/usuarios', { data: { id: id }})
            .then((result) => {
                window.location.reload()
         })
@@ -30,13 +37,24 @@ export default function EditCustomers(req) {
             const data = {
                 'id': id,
             };
-            console.log(data)
 
             const response = await api.get('api/usuarios/'+id, {
                 
             });
             setEmployees(response.data)
         }
+        async function loadOffices() {
+            const response = await api.get('/api/escritorios', {
+            });
+            setOffices(response.data)
+        }
+        async function loadSchemes() {
+            const response = await api.get('/api/planos', {
+            });
+            setSchemes(response.data)
+        }
+    loadOffices();
+    loadSchemes();
 
         loadEmployees();
         loadCustomer();
@@ -52,6 +70,8 @@ export default function EditCustomers(req) {
             'id': id,
             'name': inputName.current.value, 
             'cpf_cnpj': inputCPF_CNPJ.current.value,
+            'id_escritorio': inputId_office.current.value,
+            'id_plano': inputId_scheme.current.value
         };
 
         await api.put('/api/clientes', data, {
@@ -89,6 +109,29 @@ export default function EditCustomers(req) {
                 onChange={event => setCPF_CNPJ(event.target.value)}
             />
             </div>
+            <div className="form-group">
+                <label>Unidade</label>
+                
+                <select className="form-control" ref={inputId_office} defaultValue={customer.id_escritorio} onChange={event => setId_office(event.target.value)} >
+                    {offices.map(office=> (
+                        <option key={office.id_escritorio} value={office.id_escritorio}>
+                            {office.nome_escritorio}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div className="form-group">
+                <label>Plano</label>
+                
+                <select className="form-control" ref={inputId_scheme} defaultValue={customer.id_plano} onChange={event => setId_scheme(event.target.value)} >
+                    {schemes.map(scheme=> (
+                        <option key={scheme.id_plano} value={scheme.id_plano}>
+                            {scheme.nome_plano}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            
             
             <button type="submit" className="btn btn-primary" onClick={(event) => handleSubmit(event)}>Atualizar</button>
             
@@ -128,7 +171,6 @@ export default function EditCustomers(req) {
             
             ))}
             </table>
-
 
             <Link to={'employees/new/'+id}>
                 <button className="btn btn-success ml-2">Cadastrar Funcionários</button>
